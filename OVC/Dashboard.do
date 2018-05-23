@@ -11,4 +11,4 @@ import delimited C:\Users\knoykhovich\Desktop\datasets\ICPI_MER_Structured_Datas
 keep if indicator == "OVC_HIVSTAT" | indicator == "OVC_HIVSTAT_NEG" | indicator == "OVC_HIVSTAT_POS" | indicator == "OVC_SERV" | indicator == "OVC_SERV_OVER_18" | indicator == "OVC_SERV_UNDER_18"
 
 *drop any unnecessary columns for OVC dashboard
-drop ïregion regionuid dataelementuid categoryoptioncombouid fy2017q1 fy2017q3 fy2018q1
+drop ïregion regionuid operatingunituid snu1uid psnuuid mechanismuid dataelementuid categoryoptioncombouid modality ismcad fy2017q1 fy2017q3 fy2018q1
