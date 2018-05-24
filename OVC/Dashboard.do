@@ -16,7 +16,7 @@ drop ïregion regionuid operatingunituid snu1uid psnuuid mechanismuid dataelemen
 *change values to numeric instead of strings
 destring fy2017_targets fy2017q2 fy2017q4 fy2017apr fy2018_targets fy2018q2, replace ignore(NULL)
 
-*move exited without graduation under TransferExit 
+*move exited without graduation under TransferExit  and move "Transferred" targets under "transfer non-PEPFAR partner" per MER Guidance for FY18
 
 replace standardizeddisaggregate = "TransferExit" if otherdisaggregate == "Exited without Graduation"
 replace standardizeddisaggregate = "TransferExit" if otherdisaggregate == "Transferred"
