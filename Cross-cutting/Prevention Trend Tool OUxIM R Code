@@ -1,0 +1,46 @@
+
+#To combine FY15-FY16 and FY17-FY18 datasets for Prevention Trends Tool 
+#DataSource: OUxIM MSD
+#Date 8/28/2018 
+
+memory.limit(size = 90000)
+
+#set working directory and load libraries
+#etwd("SET WORKING DIRECTORY")
+
+library(tidyverse)
+library(plyr)
+
+#read in datasets and remove NULL, N/A, and NA values
+
+df1 <- read_tsv(file = "ICPI_MER_Structured_Dataset_OU_IM_FY15-16_20180515_v1_1.txt", 
+                col_types = cols(MechanismID        = "c"), na=c("NULL", "N/A", "NA"))
+df2 <- read_tsv(file = "MER_Structured_Dataset_OU_FY17-18_20180815_v1_1.txt", 
+                col_types = cols(MechanismID        = "c"), na=c("NULL", "N/A", "NA"))
+
+colnames(df1)
+
+#subset for indicators of interest
+subdf1 <- subset(df1, indicator == 'PP_PREV' | indicator == "KP_PREV" | indicator == "KP_PREV_MSMTGSW" | indicator == "GEND_GBV"| indicator == "VMMC_CIRC" |indicator ==  "PrEP_NEW" |indicator ==  "OVC_SERV")
+subdf2 <- subset(df2, indicator == 'PP_PREV' | indicator == "KP_PREV" | indicator == "KP_PREV_MSMTGSW" | indicator == "GEND_GBV"| indicator == "VMMC_CIRC" |indicator ==  "PrEP_NEW" |indicator ==  "OVC_SERV")
+
+#remove unnecessary columns
+longdf1 <- subset(subdf1, select = -c(Region, RegionUID, OperatingUnitUID, CountryName, isMCAD, coarseDisaggregate, disaggregate,
+                                         MechanismUID, categoryOptionComboName, dataElementUID, categoryOptionComboUID))
+colnames(longdf1)
+
+longdf2 <- subset(subdf2, select = -c(Region, RegionUID, OperatingUnitUID, CountryName, isMCAD, coarseDisaggregate, disaggregate,
+                                         MechanismUID, categoryOptionComboName))
+colnames(longdf2)
+
+#merge longdf1 and longdf2
+mergedf <- bind_rows (longdf1, longdf2)
+colnames(mergedf)
+
+#reshape datasets from wide to long, putting all results/targets into one column; removes rows with missing values
+finaldf <- gather(mergedf, key= "period", "value", FY2015Q2:FY2019_TARGETS, na.rm=TRUE)
+
+count(finaldf, "period")
+
+#Export dataset to csv
+write.csv(finaldf, file = "MSD_Merged_OUxIM_FY15toFY18_v6.txt", row.names = FALSE)
