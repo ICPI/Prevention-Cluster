@@ -1,13 +1,9 @@
-#Title: Working code
-#Date updated: 11/07/2018
+#Date updated: 11/16/2018
 #Purpose: To subset PSNU X IM Genie Extract for OVC FY18Q4 clean dashboard
+#Software: R
 
-
+#increase memory
 memory.limit(size = 90000)
-
-
-
-getwd()
 
 #install & load packages 
 install.packages('tidyverse')
@@ -19,8 +15,8 @@ library(skimr)
 library(tidyverse)
 library(ICPIutilities)
 
-#read genie file
-genie <- read_msd("GenieOUxIM20181102.txt")
+#read genie file using ICPI Utilities (read_msd)
+genie <- read_msd("DHIS2_ef2d178f5bd340779acfcea01eb19bed.txt")
 
 #list column names and numbers
 colnames(genie)
@@ -35,12 +31,12 @@ str(genie1)
 names(genie1)
 unique(genie1$standardizeddisaggregate)
 
-#remove age/sex/service  
+#remove age/sex/service from the standardized disaggregate column since that is only for DREAMS 
 genie2 <- genie1[ which(genie1$standardizeddisaggregate !='Age/Sex/Service'), ]
 names(genie2)
 unique(genie2$standardizeddisaggregate)
 
-#does the dataset contain any NAs?
+#check if the dataset contains any NAs
 any(is.na(genie2))
 
 #how many NAs are there?
@@ -54,15 +50,15 @@ genie2 %>%
   select(25:33) %>% 
   skim()
 
-#new dataset to filter out NAs & zeroes
+#create a new dataset to filter out NAs & zeroes
 genie3 <- genie2
 
-# look at how many records would be left without NAs and zeroes across FY columns
+#look at how many records would be left without NAs and zeroes across FY columns
 genie3 %>% 
   filter_at(vars(starts_with("FY")), any_vars(!is.na(.) & .!=0)) %>% 
   nrow()
 
-#  filter out the NAs & zeroes
+#filter out the NAs & zeroes
 genie4 <- genie3 %>% 
   filter_at(vars(starts_with("FY")), any_vars(!is.na(.) & .!=0))
 
@@ -75,20 +71,19 @@ genie4 %>%
   skim()
 
 
-#move "exited without graduated" from program status StandardizedDisaggregate to Transferexit  
+#move "exited without graduated" from program status StandardizedDisaggregate to Transferexit since it is duplicated in the ProgramStatus category
 genie5 <- genie4 %>%
   mutate(standardizeddisaggregate = case_when(
     otherdisaggregate %in% c('Exited without Graduation', 'Transferred')~ 'TransferExit',
     TRUE~standardizeddisaggregate))
 
+#check dataset
+head(genie5)
 
-#reshape from wide to long, putting all results/targets into one column; removes rows with missing values too
-genie6 <- gather(genie5, key = "period", "value", fy2017_targets:fy2019_targets, na.rm = TRUE)
- 
+# Create new column called "calcfy2018apr" to pull Q4 values from Age/Sex disaggs and TransferExit disaggs into new calcfy2018aapr column, all other values take from fy2018apr and put into new "calcfy2018apr" column. 
+genie6 <- mutate(genie5, calcfy2018apr = if_else(indicator == "OVC_SERV" & standardizeddisaggregate == "Age/Sex", fy2018q4,
+                                       if_else(indicator == "OVC_SERV" & standardizeddisaggregate == "TransferExit", fy2018q4, fy2018apr)))
 
-#export wide  to csv/txt for dashboard
-write.csv(genie5,"GeniePSNUxIM_OVC_20181106.csv", row.names = FALSE)
 
-#export long to csv for dashboard
-write.csv(genie6,"GeniePSNUxIM_OVC_20181106_long.csv", row.names = FALSE)
-
+#export wide  to csv/txt for dashboard (testing age/sex and transferexit APR calculation)
+write.csv(genie6,"GeniePSNUxIM_OVC_20181116b.csv", row.names = FALSE)
