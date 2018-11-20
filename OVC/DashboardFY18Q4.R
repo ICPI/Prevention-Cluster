@@ -1,5 +1,5 @@
 #Date updated: 11/20/2018
-#Purpose: To subset PSNU X IM Genie Extract for OVC FY18Q4 clean dashboard
+#Purpose: To subset PSNU X IM Genie Extract for OVC FY18Q4 initial dashboard
 #Software: R
 
 memory.limit(size = 90000)
