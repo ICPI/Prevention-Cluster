@@ -1,5 +1,5 @@
 #Date updated: 01/31/2019
-#Purpose: To explort new format of PSNU X IM MSD  format for OVC Trends Analysis
+#Purpose: To explore new format of PSNU X IM MSD  format for OVC Trends Analysis
 #Software: R
 
 #A.inrcease memory and check working directory
