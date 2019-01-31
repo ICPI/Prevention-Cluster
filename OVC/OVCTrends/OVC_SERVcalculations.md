@@ -4,12 +4,22 @@
 - display trends by disaggregates: Active, Graduated, Transferred 
 - in FY2018, transferred can be split out to PEPFAR/non-PEPFAR
 
-## Summary Table of Changes for OVC_SERV
+## Summary Table of Changes for OVC_SERV Results
 | Year | Total Numerator | Active definition|APR calculation|
 | ------------- |:-----------:| --------------:| -----------------------:| 
 | FY2017    | Active + Grad + Transferred + Exited | last 3 months | Q4 Active + (Q2+Q4 Graduated) + (Q2+Q4 Transferred) + (Q2+Q4 Exited)|
 | FY2018     | Active + Grad | last 3 months | Q4 Active + Q4 Graduated|
 | FY2019| Active + Grad   | last 6 months  | Q4 Active + Q4 Graduated|
+
+## Summary Table of Changes for OVC_SERV TARGETS
+*note: in FY18-19, the participation status and age/sex targets were separate. In FY20, targets changed to be set for active by age/sex disaggregation and for graduated by age/sex disaggregation*.
+
+| Year | Total Numerator | Participation Status |Age/Sex|
+| ------------- |:-----------:| --------------:| -----------------------:| 
+| FY2017    | X |  | |
+| FY2018     |  | X | X |
+| FY2019| | exit, transfers |  active & grad - disaggregated by age/sex|
+
 
 
 ### FY2017
