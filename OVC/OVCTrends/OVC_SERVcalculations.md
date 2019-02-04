@@ -12,7 +12,7 @@
 | FY2019| Active + Grad   | last 6 months  | Q4 Active + Q4 Graduated|
 
 ## Summary Table of Changes for OVC_SERV TARGETS
-*note: in FY18-19, the participation status and age/sex targets were separate. In FY20, targets changed to be set for active by age/sex disaggregation and for graduated by age/sex disaggregation*.
+*note: In FY18-19, the participation status and age/sex targets were set separately. In FY20, targets changed to be set for active by age/sex disaggregation and for graduated by age/sex disaggregation*.
 
 | Year | Total Numerator | Participation Status |Age/Sex|
 | ------------- |:-----------:| --------------:| -----------------------:| 
