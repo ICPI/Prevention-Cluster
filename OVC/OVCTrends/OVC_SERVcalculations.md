@@ -1,9 +1,5 @@
 # Tracking OVC_SERV Changes
 
-## Proposal for Trends analysis
-- display trends by disaggregates: Active, Graduated, Transferred 
-- in FY2018, transferred can be split out to PEPFAR/non-PEPFAR
-
 ## Summary Table of Changes for OVC_SERV Results
 | Year | Total Numerator | Active definition|APR calculation|
 | ------------- |:-----------:| --------------:| -----------------------:| 
