@@ -17,7 +17,7 @@
 | Year | Total Numerator | Participation Status |Age/Sex|
 | ------------- |:-----------:| --------------:| -----------------------:| 
 | FY2017    | X |  | |
-| FY2018     |  | X | X |
+| FY2018     |  | all status available  | X |
 | FY2019| | exit, transfers |  active & grad - disaggregated by age/sex|
 
 ## DETAILED Changes for OVC_SERV Results
