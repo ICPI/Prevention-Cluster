@@ -71,6 +71,14 @@ unique(df3$disaggregate)
 testdisaggs <- data.frame(df3$indicator, df3$standardizeddisaggregate, df3$disaggregate, df3$otherdisaggregate)
 unique(testdisaggs[which(testdisaggs$df3.indicator == "OVC_SERV"), ])
 
+
+# Replace Swaziland with Eswatini
+unique(df3$operatingunit)
+df4 <- df3
+df4$operatingunit <- ifelse(df3$operatingunit=="Swaziland", "Eswatini", df3$operatingunit)
+unique(df4$operatingunit)
+
+
 # export dataset to csv/txt
-write.csv(df3,"OVC_PSNUxIM_FY15toFY18.csv", row.names = FALSE)
+write.csv(df4,"OVC_PSNUxIM_FY15toFY18.csv", row.names = FALSE)
 
