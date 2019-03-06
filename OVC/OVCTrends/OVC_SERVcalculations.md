@@ -3,9 +3,11 @@
 ## Summary Table of Changes for OVC_SERV Results
 | Year | Total Numerator | Active definition|APR calculation|
 | ------------- |:-----------:| --------------:| -----------------------:| 
-| FY2017    | Active + Grad + Transferred + Exited | last 3 months | Q4 Active + (Q2+Q4 Graduated) + (Q2+Q4 Transferred) + (Q2+Q4 Exited)|
+| FY2017*    | Active + Grad + Transferred + Exited | last 3 months | Q4 Active + (Q2+Q4 Graduated) + (Q2+Q4 Transferred) + (Q2+Q4 Exited)|
 | FY2018     | Active + Grad | last 3 months | Q4 Active + Q4 Graduated|
 | FY2019| Active + Grad   | last 6 months  | Q4 Active + Q4 Graduated|
+
+*To complete trends analysis with similar aggregations of data, for FY2017 use Q4 Active + (Q2+Q4 Graduated) to sum for the Total Numerator to align with the APR calculation for FY2018 and FY2019
 
 ## Summary Table of Changes for OVC_SERV TARGETS
 *note: In FY18-19, the participation status and age/sex targets were set separately. In FY20, target-setting changed to include program status by age/sex disaggregates: active by age/sex disaggregation and  graduated by age/sex disaggregation*.
