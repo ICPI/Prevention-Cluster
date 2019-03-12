@@ -1,6 +1,6 @@
 # Tracking OVC_SERV Changes
 
-## Summary Table of Changes for OVC_SERV Results
+## Summary Table of Changes for OVC_SERV Results based on MER Guidance
 | Year | Total Numerator | Active definition|APR calculation|
 | ------------- |:-----------:| --------------:| -----------------------:| 
 | FY2017*    | Active + Grad + Transferred + Exited | last 3 months | Q4 Active + (Q2+Q4 Graduated) + (Q2+Q4 Transferred) + (Q2+Q4 Exited)|
