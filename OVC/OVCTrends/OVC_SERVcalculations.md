@@ -5,7 +5,7 @@
 | ------------- |:-----------:| --------------:| -----------------------:| 
 | FY2017*    | Active + Grad + Transferred + Exited | last 3 months | Q4 Active + (Q2+Q4 Graduated) + (Q2+Q4 Transferred) + (Q2+Q4 Exited)|
 | FY2018     | Active + Grad | last 3 months | Q4 Active + Q4 Graduated|
-| FY2019| Active + Grad   | last 6 months  | Q4 Active + Q4 Graduated|
+| FY2019| Active + Grad (by age/sex)  | last 6 months  | Q4 Active + Q4 Graduated|
 
 *To complete trends analysis with similar aggregations of data, for FY2017 use Q4 Active + (Q2+Q4 Graduated) to sum for the Total Numerator to align with the APR calculation for FY2018 and FY2019*
 
@@ -16,13 +16,13 @@
 | ------------- |:-----------:| --------------:| -----------------------:| 
 | FY2017    | X |  | |
 | FY2018     |  | all status available  | X |
-| FY2019| | exit, transfers |  active & grad - disaggregated by age/sex|
+| FY2019| Active & Grad | exit, transfers | X |
 
 ## DETAILED Changes for OVC_SERV Results
 
 ### FY2017
 
-The numerator is the sum of the following Program participation disaggregations:
+The MER guidance indicated that the OVC_SERV Total Numerator is the sum of the following Program participation disaggregations:
 1. Active beneficiaries
 2. Graduated beneficiaries
 3. Transferred beneficiaries
