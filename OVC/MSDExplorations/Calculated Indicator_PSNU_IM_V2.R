@@ -18,18 +18,47 @@ Play1 <- read_msd("C:/Users/ovu6/Desktop/Prevention Cluster/OVC/Calculated Indic
 Play2 <- filter(Play1, indicator == 'OVC_SERV' | indicator == 'OVC_SERV_OVER_18' | indicator == 'OVC_SERV_UNDER_18' | 
                 indicator == 'OVC_HIVSTAT'| indicator == 'OVC_HIVSTAT_NEG' | indicator == 'OVC_HIVSTAT_POS')
 
-#change new data structure to old data structure 
-# #label rows
-# Df4_rownumbers <- tibble::rowid_to_column(Df2_filterindicator)
+# #change new data structure to old data structure 
+#  #label rows
+# Df4_rownumbers <- tibble::rowid_to_column(Play2)
 # 
-# #take years from long to wide
-# Df5_NewPeriod <- Df4_rownumbers %>% 
-#   gather("period","value",targets:cumulative) %>% 
-#   mutate(fiscalperiod = paste(fiscal_year,period)) %>%
-#   spread(fiscalperiod,value) 
-# 
+# unique(Df4_rownumbers$indicator) 
 # colnames(Df4_rownumbers)
-# unique(Df5_NewPeriod$`2018 Qtr4`)
+# 
+# # take years from long to wide
+# Df5_NewPeriod <- Df4_rownumbers %>% 
+# gather("period","value",targets:cumulative) %>% 
+# mutate(fiscalperiod = paste(fiscal_year,period)) %>%
+# spread(fiscalperiod,value) 
+# 
+# Df6_RemoveCol <- Df5_NewPeriod %>% 
+#   select(-c("fiscal_year", "period", "rowid"))
+# 
+# colnames(Df7_RemoveCol)
+# 
+# #Rename Columns
+# Df7_NewHeader <- Df6_RemoveCol %>% rename(
+#   "FY2017Q1" = "2017 qtr1",
+#   "FY2017Q2" = "2017 qtr2",
+#   "FY2017Q3" = "2017 qtr3",
+#   "FY2017Q4" = "2017 qtr4",
+#   "FY2017APR" = "2017 cumulative",
+#   "FY2017_TARGETS" = "2017 targets",
+#   "FY2018Q1" = "2018 qtr1",
+#   "FY2018Q2" = "2018 qtr2",
+#   "FY2018Q3" = "2018 qtr3",
+#   "FY2018Q4" = "2018 qtr4",
+#   "FY2018_TARGETS" = "2018 targets",
+#   "FY2018APR" = "2018 cumulative",
+#   "FY2019Q1" = "2019 qtr1",
+#   "FY2019Q2" = "2019 qtr2",
+#   "FY2019Q3" = "2019 qtr3",
+#   "FY2019Q4" = "2019 qtr4",
+#   "FY2019_TARGETS" = "2019 targets",
+#   "FY2019APR" = "2019 cumulative",
+#   "AgeFine" = "trendsfine",
+#   "AgeSemiFine" = "trendssemifine",
+#   "AgeCoarse" = "trendscoarse")
 
 # Pull out Active & Graduated values for OVC_Serv and use that to calculate Total Numerator 
 Play3 <- Play2 %>%  
