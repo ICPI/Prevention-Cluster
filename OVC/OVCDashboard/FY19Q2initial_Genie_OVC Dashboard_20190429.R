@@ -6,7 +6,7 @@
 memory.limit(size = 90000)
 getwd()
 
-#istallation directory - please change username to your username. This will direct R libraries/packages to install and run smoothly with RStudio.
+#installation directory - please change username to your username. This will direct R libraries/packages to install and run smoothly with RStudio.
 .libPaths(c("C:/Users/knoykhovich/R", .libPaths()))
 
 #install & load packages 
