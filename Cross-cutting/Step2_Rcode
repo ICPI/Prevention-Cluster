@@ -1,0 +1,36 @@
+#Purpose: Final merge of all transformed files to create a global PC dataset for all HE indicators (+Youth, AG)
+#Date: 5/29/19
+#Data source: Manipulated Post indicator extracts (VRT)
+
+#set working directory and load libraries
+setwd("C:/Users/Ksato/Peace Corps/Global Dataset/Final_Merge_2018")
+
+#load libraries
+library(tidyverse)
+library(purrr)
+library(openxlsx)
+
+#list all files ending with csv in directory
+xlsx_files= list.files(path= 'C:/Users/Ksato/Peace Corps/Global Dataset/Final_Merge_2018', 
+                      pattern = "xlsx$", full.names = TRUE)
+        
+
+#read each csv file into a list and combine into one frame
+df1 <- purrr::map_dfr(xlsx_files, read.xlsx)
+
+#check column names
+colnames(df)
+
+#drop any unnecessary columns
+subdf <- df[c(-(1:2), -(23:28), -(27:28),  -(33:46))]
+colnames(subdf)
+
+#Check for N/A values
+is.na(subdf)
+
+#Replace N/A values with blanks
+subdf [is.na(subdf)]=""
+is.na(subdf)
+
+#export master file
+write.xlsx(subdf, file = "Global_Dataset_2018.xlsx", row.names = F)
