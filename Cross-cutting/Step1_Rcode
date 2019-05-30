@@ -1,0 +1,54 @@
+#Purpose: To create a global PC dataset for all HE indicators (+Youth, AG)
+#Date: 5/16/19
+#Data source: Post indicator extracts
+
+#set working directory and load libraries
+setwd("C:/Users/Ksato/Peace Corps/Global Dataset")
+
+library(openxlsx)
+library(readxl)
+library(purrr)
+library(tidyverse)
+
+#merge all sheets in indicator extract, adding columns in a wide format
+file <- 'VRT_Extract_kweeks_20_May_2019_Albania 2018.xlsx'
+sheets <- excel_sheets(file)
+df1 <- map_df(sheets, ~ read_excel(file, sheet = .x))
+
+#remove unnecessary indicators
+unique (df1$IndicatorCode)
+df2 <- subset(df1, IndicatorCode == "HE-079" | IndicatorCode == "HE-083" | IndicatorCode == "HE-090" | IndicatorCode == "HE-095"| IndicatorCode == "HE-114" |
+                   IndicatorCode == "HE-115" |IndicatorCode ==  "HE-134" | IndicatorCode ==  "HE-128" | IndicatorCode ==  "HE-129" | IndicatorCode ==  "HE-130" |
+                   IndicatorCode ==  "HE-131" |IndicatorCode ==  "HE-132" |IndicatorCode ==  "HE-133" |IndicatorCode ==  "HE-134" |IndicatorCode ==  "HE-135" | 
+                   IndicatorCode == "HE-138" | IndicatorCode ==  "ED-027-A" | IndicatorCode == "HE-033" | IndicatorCode == "HE-034" | IndicatorCode == "HE-036" | IndicatorCode == "YD-001-A"| IndicatorCode == "YD-002-A" |
+                  IndicatorCode == "YD-003-A" |IndicatorCode ==  "YD-004-A " | IndicatorCode ==  "YD-016-C" | IndicatorCode ==  "HE_HIV_038" | IndicatorCode ==  "HE_HIV_140" |
+                  IndicatorCode ==  "HE_HIV_142" |IndicatorCode ==  "HE_HIV_182" |IndicatorCode ==  "HE_HIV_183" |IndicatorCode ==  "HE_HIV_184" |IndicatorCode ==  "HE_HIV_185" | 
+                  IndicatorCode == "HE_HIV_201" | IndicatorCode ==  "HE_HIV_202" | IndicatorCode == "HE_HIV_203" | IndicatorCode == "HE_HIV_204" | IndicatorCode == "HE_HIV_206" | IndicatorCode == "HE_HIV_207"| IndicatorCode == "HE_HIV_211" |
+                IndicatorCode == "HE_HIV_213" |IndicatorCode ==  "HE_HIV_214" | IndicatorCode ==  "HE_HIV_215" | IndicatorCode ==  "HE_HIV_217" | IndicatorCode ==  "HE_HIV_218" |
+                IndicatorCode ==  "HE_HIV_219" |IndicatorCode ==  "HE_HIV_220" |IndicatorCode ==  "HE_HIV_221" |IndicatorCode ==  "HE_HIV_224" |IndicatorCode ==  "HE_HIV_225" | 
+                IndicatorCode == "HE_HIV_229" | IndicatorCode ==  "HE_HIV_232" | IndicatorCode == "HE_MNCH_029" | IndicatorCode == "HE_MNCH_079" | IndicatorCode == "HE_MNCH_083" | IndicatorCode == "HE_MNCH_085"| IndicatorCode == "HE_MNCH_090" |
+                IndicatorCode == "HE_MNCH_093" |IndicatorCode ==  "HE_MNCH_095" | IndicatorCode ==  "HE_MNCH_112" | IndicatorCode ==  "HE_MNCH_113" | IndicatorCode ==  "HE_MNCH_114" |
+                IndicatorCode ==  "HE_MNCH_115" |IndicatorCode ==  "HE_MNCH_116" |IndicatorCode ==  "HE_MNCH_128" |IndicatorCode ==  "HE_MNCH_134" |IndicatorCode ==  "HE_MNCH_240" | 
+                IndicatorCode == "HE_MNCH_241" | IndicatorCode ==  "HE_MNCH_242" |   IndicatorCode == "HE_MNCH_243" |IndicatorCode ==  "HE_MNCH_245" | IndicatorCode ==  "HE_MNCH_246" | IndicatorCode ==  "HE_MNCH_247" | IndicatorCode ==  "HE_MNCH_248" |
+                IndicatorCode ==  "HE_MNCH_249" |IndicatorCode ==  "HE_MNCH_250" |IndicatorCode ==  "HE_MNCH_252_FTF" |IndicatorCode ==  "HE_MNCH_253_FTF" |IndicatorCode ==  "HE_MNCH_255_FTF" | 
+                IndicatorCode == "HE_YOUTH_037" | IndicatorCode ==  "HE_YOUTH_050" | IndicatorCode == "HE_YOUTH_200" | IndicatorCode == "HE_YOUTH_260" | IndicatorCode == "HE_YOUTH_261" | IndicatorCode == "HE_YOUTH_262"| IndicatorCode == "HE_YOUTH_263" |
+                IndicatorCode == "HE_YOUTH_264" |IndicatorCode ==  "HE_YOUTH_265" | IndicatorCode ==  "HE_YOUTH_266" | IndicatorCode ==  "HE_YOUTH_267" | IndicatorCode ==  "HE_YOUTH_268" |
+                IndicatorCode ==  "HE_YOUTH_269" |IndicatorCode ==  "HE_YOUTH_270" |IndicatorCode ==  "HE_YOUTH_271" |IndicatorCode ==  "HE_YOUTH_272" |IndicatorCode ==  "HE_YOUTH_273" | 
+                IndicatorCode == "HE_YOUTH_274" | IndicatorCode ==  "HE_YOUTH_275" |  IndicatorCode == "HE_YOUTH_276" |IndicatorCode ==  "AG_FTF_038" | IndicatorCode ==  "CED_Econ_004" | IndicatorCode ==  "CED_Econ_005" | IndicatorCode ==  "CED_Econ_020" |
+                IndicatorCode ==  "YD-005" | IndicatorCode ==  "HE-140-PEPFAR" | IndicatorCode ==  "HE-140-PEPFAR (FY2017)" | IndicatorCode ==  "HE-142-PEPFAR" | IndicatorCode ==  "HE-185-PEPFAR"
+              | IndicatorCode ==  "HE-200-Linkages")
+
+unique (df2$IndicatorCode)           
+                   
+#check column names
+column_length<- colnames(df2)
+col_last<-length(column_length)
+
+#reshape dataset from wide to long
+longdf <- gather(df2, key= "disaggregate", "value", 54:col_last, na.rm=TRUE)
+colnames(longdf)
+
+#ensure value columns is numeric
+longdf$value <- as.numeric(as.character(longdf$value))
+
+write.xlsx(longdf, file = "Albania_2018.xlsx", colNames = TRUE)
