@@ -74,4 +74,4 @@ is.na(subdf3)
 #NOTE- next quarter transform data into "Period" and "Value" columns
 
 #Export dataset to csv or txt to load into Excel dashboard
-write.csv(subdf3,"DREAMS_MSD_FY19Q3_initial.csv", row.names = FALSE)
+write.table(subdf3,"DREAMS_MSD_FY19Q3_initial.txt", row.names = FALSE)
