@@ -46,32 +46,39 @@ subdf2 <- filter(subdf1, standardizedDisaggregate !="ViolenceServiceType" & stan
 #Check for unique variables remaining in StandardizeDisaggregate
 unique (subdf2$standardizedDisaggregate)
 
+#Split AGYW_PREV into two columns: Other disagg and otherdisagg_agyw
+subdf3 <- separate(subdf2, otherDisaggregate, into = c("otherDisaggregate", "otherDisagg_AGYW"), sep = ", ")
+
+#check new column values in both datasets
+unique(subdf3$otherDisaggregate)
+unique(subdf3$otherDisagg_AGYW)
+
 #Filter to only FY2019
-subdf2 <- filter(subdf2, Fiscal_Year =="2019")
-unique (subdf2$Fiscal_Year)
+subdf3 <- filter(subdf3, Fiscal_Year =="2019")
+unique (subdf3$Fiscal_Year)
 
 #Check DSNUs
-unique (subdf2$DSNU)
-
-#Check for unique column names
-colnames(subdf2)
-
-#Drop unnecessary columns
-subdf3 <- subset(subdf2, select = -c(Region, RegionUID, OperatingUnitUID, CountryName, SNU1Uid, PSNUuid, coarseDisaggregate, disaggregate,
-                                     typeMilitary, categoryOptionComboName, DREAMS, DSNUuid, TrendsCoarse, pre_rgnlztn_hq_mech_code,
-                                     prime_partner_duns, award_number, StatusTB, StatusCX, hiv_treatment_status, population))
+unique (subdf3$DSNU)
 
 #Check for unique column names
 colnames(subdf3)
 
+#Drop unnecessary columns
+subdf4 <- subset(subdf3, select = -c(Region, RegionUID, OperatingUnitUID, CountryName, SNU1Uid, PSNUuid, coarseDisaggregate, disaggregate,
+                                     typeMilitary, categoryOptionComboName, DREAMS, DSNUuid, TrendsCoarse, pre_rgnlztn_hq_mech_code,
+                                     prime_partner_duns, award_number, StatusTB, StatusCX, hiv_treatment_status, population))
+
+#Check for unique column names
+colnames(subdf4)
+
 #Check for N/A values
-is.na(subdf3)
+is.na(subdf4)
 
 #Replace N/A values with blanks
-subdf3 [is.na(subdf3)]=""
-is.na(subdf3)
+subdf4 [is.na(subdf4)]=""
+is.na(subdf4)
 
 #NOTE- next quarter transform data into "Period" and "Value" columns
 
 #Export dataset to csv or txt to load into Excel dashboard
-write.table(subdf3,"DREAMS_MSD_FY19Q3_initial.txt", row.names = FALSE)
+write.table(subdf4,"DREAMS_MSD_FY19Q3_initial.txt", row.names = FALSE)
